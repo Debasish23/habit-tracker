@@ -1,0 +1,73 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-26T07:59:51.482Z",
+  "summary": "The diff implements all three requirements. REQ-7 (login page with Internet Identity) is covered by LoginPage.tsx and App.tsx routing. REQ-8 (per-user habit isolation in backend) is covered by backend/main.mo using Principal-keyed maps and migration.mo. REQ-9 (chart bar popup) is covered by CompletedHabitsPopover.tsx and MonthlyHabitsChart.tsx. A ProfileSetupModal was also introduced which was not requested, useActor.ts was modified despite the constraint forbidding it, and several other unasked-for features were added.",
+  "missing_requirements": [],
+  "hallucinated_features": [
+    {
+      "description": "ProfileSetupModal: a modal prompting authenticated users to enter their display name on first login, with a useSaveCallerUserProfile mutation.",
+      "reason": "No requirement asks for user profile management or a profile setup step. The non-goals explicitly exclude 'User profile management or settings page.'",
+      "evidence": [
+        "frontend/src/components/ProfileSetupModal.tsx",
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "description": "User profile display in the Layout header (user name shown next to logout button via getCallerUserProfile query).",
+      "reason": "Displaying a user profile name in the header and fetching a UserProfile from the backend is not part of any stated requirement and conflicts with the non-goal of no user profile management.",
+      "evidence": [
+        "frontend/src/components/Layout.tsx",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Backend user profile endpoints: getCallerUserProfile, getUserProfile, saveCallerUserProfile, and the UserProfile type added to the actor.",
+      "reason": "No requirement asks for user profiles; the non-goals explicitly exclude user profile management.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/hooks/useQueries.ts"
+      ]
+    },
+    {
+      "description": "Modification of frontend/src/hooks/useActor.ts to add getSecretParameter import and _initializeAccessControlWithSecret call.",
+      "reason": "The build constraints explicitly state 'Do not modify files under … frontend/src/hooks/useActor.ts'.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts"
+      ]
+    },
+    {
+      "description": "Role-based access control / authorization mixin (MixinAuthorization, AccessControl) imported and used in backend/main.mo with permission checks on every method.",
+      "reason": "No requirement asks for a role-based access control system or authorization mixin; requirements only ask for per-principal data isolation.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "frontend/src/utils/urlParams.ts utility module for URL and session parameter persistence including caffeineAdminToken handling.",
+      "reason": "No requirement mentions URL parameter management, admin tokens, or session parameter utilities.",
+      "evidence": [
+        "frontend/src/utils/urlParams.ts",
+        "frontend/src/hooks/useActor.ts"
+      ]
+    }
+  ],
+  "confidence": 0.82,
+  "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/App.tsx",
+    "frontend/src/components/CompletedHabitsPopover.tsx",
+    "frontend/src/components/Layout.tsx",
+    "frontend/src/components/MonthlyHabitsChart.tsx",
+    "frontend/src/components/ProfileSetupModal.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/pages/LoginPage.tsx",
+    "frontend/src/utils/chartHelpers.ts",
+    "frontend/src/utils/urlParams.ts",
+    "project_state.json"
+  ]
+}

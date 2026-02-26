@@ -1,0 +1,83 @@
+{
+  "kind": "build_request",
+  "title": "User authentication, per-user habit isolation, and chart bar popup",
+  "projectName": "Habit Tracker",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-7",
+      "text": "Add a login/signup page that allows users to create an account and log in using Internet Identity. The page should be the entry point for unauthenticated users and redirect to the main HabitsPage upon successful authentication.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "Create a login page where users can create an account and then add habits based on their choice."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Unauthenticated users are shown a login/signup page instead of HabitsPage.",
+        "The login page includes a clear call-to-action button that triggers Internet Identity authentication.",
+        "After successful login, the user is redirected to HabitsPage.",
+        "The login page matches the app's warm, minimal visual design."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Update the backend actor to scope all habit data to the authenticated caller's principal. The getHabits, createHabit, deleteHabit, markComplete, and unmarkComplete methods must only read and write habits belonging to the calling user's principal, so one user's habits are never visible to another.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "One user's habit should not be displayed to other user."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each habit is stored with its owner's principal.",
+        "getHabits() returns only habits owned by the calling principal.",
+        "createHabit, deleteHabit, markComplete, and unmarkComplete reject or ignore operations on habits not owned by the caller.",
+        "Logging in as a different user shows a completely separate, empty habit list."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "In the MonthlyHabitsChart component on HabitsPage, show a small popup (tooltip or modal) when the user clicks a bar. The popup must list the names of all habits that were completed on that specific calendar day.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-6"
+        ],
+        "quotes": [
+          "While clicking on the bars dispalyed on the monthly chat, a small popup will display the habit details which are completed"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clicking a bar in the monthly chart opens a popup anchored near the bar.",
+        "The popup displays the calendar date and a list of habit names completed on that day.",
+        "If no habits were completed on that day, the popup shows an appropriate empty state message.",
+        "The popup can be dismissed by clicking outside it or clicking the bar again.",
+        "The popup styling is consistent with the app's warm, minimal aesthetic."
+      ]
+    }
+  ],
+  "constraints": [
+    "Authentication must use Internet Identity via the existing useInternetIdentity hook; do not introduce any third-party auth provider.",
+    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui.",
+    "Backend must remain a single Motoko actor in backend/main.mo.",
+    "Generate migration.mo to preserve existing habit data when upgrading the backend state schema."
+  ],
+  "nonGoals": [
+    "Social login (Google, GitHub, Facebook, etc.).",
+    "Email/password authentication.",
+    "User profile management or settings page.",
+    "Sharing habits between users.",
+    "Any changes to existing streak computation or calendar toggle logic."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

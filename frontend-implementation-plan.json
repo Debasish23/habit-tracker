@@ -1,0 +1,94 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "User authentication, per-user habit isolation, and chart bar popup",
+  "requirements": [
+    {
+      "id": "REQ-7",
+      "summary": "Add a login/signup page that allows users to create an account and log in using Internet Identity, serving as the entry point for unauthenticated users and redirecting to HabitsPage upon successful authentication.",
+      "acceptanceCriteria": [
+        "Unauthenticated users are shown a login/signup page instead of HabitsPage.",
+        "The login page includes a clear call-to-action button that triggers Internet Identity authentication.",
+        "After successful login, the user is redirected to HabitsPage.",
+        "The login page matches the app's warm, minimal visual design."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/LoginPage.tsx",
+          "operation": "create",
+          "description": "Create a login/signup page component that uses the authorization component to provide Internet Identity authentication. The page displays a welcoming hero section with the habit-logo.dim_128x128.png from frontend/public/assets/generated/habit-logo.dim_128x128.png, app branding, and a prominent call-to-action button that triggers login via the useInternetIdentity hook. The design matches the app's warm, minimal aesthetic using the existing Tailwind theme tokens. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ProfileSetupModal.tsx",
+          "operation": "create",
+          "description": "Create a modal component that prompts first-time authenticated users to enter their name and save their profile using the authorization component's getCallerUserProfile and saveCallerUserProfile methods. The modal appears after successful login when the user has no profile. Include form validation, loading states, and follows the authorization component's usage pattern to prevent modal flash by checking actor availability and profile state. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add React Query hooks for user profile operations using the authorization component: useGetCallerUserProfile (with proper actor dependency handling to prevent modal flash), useSaveCallerUserProfile mutation, and useGetUserProfile for fetching other users' profiles. Each hook should use the actor from useActor and follow React Query best practices with proper query keys and cache invalidation. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Update the App component to implement authentication routing logic. Check authentication state using the authorization component's useInternetIdentity hook. Show LoginPage for unauthenticated users, ProfileSetupModal for authenticated users without a profile, and HabitsPage for authenticated users with a profile. Clear React Query cache on logout. Ensure proper loading states are shown during authentication and profile checks to prevent UI flashing. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "modify",
+          "description": "Add a logout button to the Layout header using the authorization component's useInternetIdentity hook. The button displays the current user's name from their profile and triggers logout followed by React Query cache clearing. Include disabled and loading states during logout. Position the button in the header alongside the logo. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Update frontend queries and mutations to work with per-user habit scoping where all habit operations are automatically filtered by the authenticated caller's principal on the backend.",
+      "acceptanceCriteria": [
+        "Each habit is stored with its owner's principal.",
+        "getHabits() returns only habits owned by the calling principal.",
+        "createHabit, deleteHabit, markComplete, and unmarkComplete reject or ignore operations on habits not owned by the caller.",
+        "Logging in as a different user shows a completely separate, empty habit list."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Update all habit query and mutation hooks to include proper error handling for authorization failures. Add user-friendly error messages when backend operations fail due to ownership violations or permission issues. Ensure the habits query cache is invalidated when the user identity changes so that switching accounts immediately shows the correct user's habit list. Add error boundaries or toast notifications for trapped authorization errors."
+        },
+        {
+          "path": "frontend/src/pages/HabitsPage.tsx",
+          "operation": "modify",
+          "description": "Add error handling UI for authorization failures in habit operations. Display user-friendly messages when create, delete, or toggle operations fail due to permission issues. Ensure the page gracefully handles empty habit lists for new users or when switching accounts. Show appropriate loading states when refetching habits after authentication changes."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Add a popup to the MonthlyHabitsChart that displays all habits completed on a clicked bar's calendar day.",
+      "acceptanceCriteria": [
+        "Clicking a bar in the monthly chart opens a popup anchored near the bar.",
+        "The popup displays the calendar date and a list of habit names completed on that day.",
+        "If no habits were completed on that day, the popup shows an appropriate empty state message.",
+        "The popup can be dismissed by clicking outside it or clicking the bar again.",
+        "The popup styling is consistent with the app's warm, minimal aesthetic."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/CompletedHabitsPopover.tsx",
+          "operation": "create",
+          "description": "Create a popover component using shadcn/ui Popover primitives that displays a list of habit names completed on a specific date. Accept props for the date, completed habit names array, and open/close state. Show the formatted date as a header, render the list of habit names, and display an empty state message when no habits were completed. Style consistently with the app's warm, minimal design using existing theme tokens. The popover can be dismissed by clicking outside or toggling the trigger."
+        },
+        {
+          "path": "frontend/src/components/MonthlyHabitsChart.tsx",
+          "operation": "modify",
+          "description": "Add click handlers to each bar in the chart that open the CompletedHabitsPopover component. Track the selected date and popover open state using React state. Pass the clicked date and the list of habit names completed on that date to the popover. Compute the list of completed habits by filtering all habits for executions matching the selected day using existing date helper utilities. Position the popover near the clicked bar element. Allow toggling the popover by clicking the same bar again or dismissing by clicking outside."
+        },
+        {
+          "path": "frontend/src/utils/chartHelpers.ts",
+          "operation": "modify",
+          "description": "Add a utility function that takes a specific date and the full habits array and returns an array of habit names that were completed on that date. Use existing dateHelpers utilities to check if each habit's executions include the given date. This function will be used to populate the CompletedHabitsPopover when a chart bar is clicked."
+        }
+      ]
+    }
+  ]
+}

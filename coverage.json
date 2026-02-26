@@ -1,0 +1,90 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-26T07:59:51.485Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 3,
+    "implemented": 3,
+    "items": [
+      {
+        "id": "REQ-7",
+        "summary": "Add a login/signup page that allows users to create an account and log in using Internet Identity. The page should be the entry point for unauthenticated users and redirect to the main HabitsPage upon successful authentication.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/LoginPage.tsx",
+          "frontend/src/components/ProfileSetupModal.tsx",
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/App.tsx",
+          "frontend/src/components/Layout.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/LoginPage.tsx",
+          "frontend/src/components/ProfileSetupModal.tsx",
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/App.tsx",
+          "frontend/src/components/Layout.tsx"
+        ]
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Update the backend actor to scope all habit data to the authenticated caller's principal. The getHabits, createHabit, deleteHabit, markComplete, and unmarkComplete methods must only read and write habits belonging to the calling user's principal, so one user's habits are never visible to another.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/pages/HabitsPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useQueries.ts"
+        ]
+      },
+      {
+        "id": "REQ-9",
+        "summary": "In the MonthlyHabitsChart component on HabitsPage, show a small popup (tooltip or modal) when the user clicks a bar. The popup must list the names of all habits that were completed on that specific calendar day.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/CompletedHabitsPopover.tsx",
+          "frontend/src/components/MonthlyHabitsChart.tsx",
+          "frontend/src/utils/chartHelpers.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/CompletedHabitsPopover.tsx",
+          "frontend/src/components/MonthlyHabitsChart.tsx",
+          "frontend/src/utils/chartHelpers.ts"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/authorization/MixinAuthorization.mo",
+    "backend/authorization/access-control.mo",
+    "backend/main.mo",
+    "backend/migration.mo",
+    "build-request.json",
+    "caffeine.lock.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/CompletedHabitsPopover.tsx",
+    "frontend/src/components/Layout.tsx",
+    "frontend/src/components/MonthlyHabitsChart.tsx",
+    "frontend/src/components/ProfileSetupModal.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/pages/LoginPage.tsx",
+    "frontend/src/utils/chartHelpers.ts",
+    "frontend/src/utils/urlParams.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 7,
+  "summary": "Habit Tracker web application with habit management, daily completion tracking, streak tracking, monthly calendar view, clean UI, and multi-user support with authentication. Each user has isolated habit data. Monthly chart bars show a popup with completed habit details on click.",
+  "architectural_notes": [
+    "Multi-user support: habit data must be scoped per authenticated user; no cross-user data leakage",
+    "Authentication flow: login/signup page required before accessing habit management features"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-build-a-habit-management-ui-that-allows-users-to-add-new-habits-via-a-text-input-and-submit-button-and-delete-existing-habits-display-all-habits-in-a-list-or-card-layout-each-habit-card-must-show-the-habit-name-the-current-streak-count-e-g-5-day-streak-and-a-button-to-mark-unmark-today-s-completion",
+      "title": "Build a habit management UI that allows users to add new habits via a text input and submit button, and delete existing habits. Display all habits in a list or card layout. Each habit card must show the habit name, the current streak count (e.g., '🔥 5 day streak'), and a button to mark/unmark today's completion.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-monthly-calendar-view-per-habit-when-a-habit-is-selected-or-expanded-show-a-grid-of-the-current-month-s-days-days-on-which-the-habit-was-completed-must-be-visually-highlighted-filled-colored-days-not-yet-completed-are-shown-as-empty-the-user-can-navigate-between-months-previous-next-clicking-a-past-or-present-day-toggles-its-completion-status-for-that-habit",
+      "title": "Implement a monthly calendar view per habit. When a habit is selected or expanded, show a grid of the current month's days. Days on which the habit was completed must be visually highlighted (filled/colored). Days not yet completed are shown as empty. The user can navigate between months (previous/next). Clicking a past or present day toggles its completion status for that habit.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-clean-modern-visual-design-with-a-warm-minimal-aesthetic-use-a-light-background-with-soft-neutral-tones-clear-typography-with-good-hierarchy-generous-whitespace-rounded-cards-and-subtle-shadows-use-an-earthy-accent-color-e-g-a-warm-terracotta-or-sage-green-consistently-for-interactive-elements-completion-indicators-and-streak-badges-ensure-the-layout-is-responsive-for-both-desktop-and-mobile-viewports",
+      "title": "Apply a clean, modern visual design with a warm, minimal aesthetic. Use a light background with soft neutral tones, clear typography with good hierarchy, generous whitespace, rounded cards, and subtle shadows. Use an earthy accent color (e.g., a warm terracotta or sage green) consistently for interactive elements, completion indicators, and streak badges. Ensure the layout is responsive for both desktop and mobile viewports.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-the-summary-stats-section-on-habitspage-update-the-best-streak-stat-card-to-display-the-name-of-the-habit-that-holds-the-best-streak-alongside-the-streak-count-e-g-12-days-morning-run",
+      "title": "In the summary stats section on HabitsPage, update the 'Best Streak' stat card to display the name of the habit that holds the best streak alongside the streak count (e.g., '🔥 12 days — Morning Run').",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-single-monthly-bar-or-area-chart-to-habitspage-that-aggregates-all-habits-daily-completion-data-for-the-current-month-each-day-on-the-x-axis-represents-a-calendar-day-the-y-axis-shows-the-count-of-habits-completed-on-that-day-include-previous-next-month-navigation-so-users-can-browse-historical-data",
+      "title": "Add a single monthly bar or area chart to HabitsPage that aggregates all habits' daily completion data for the current month. Each day on the X-axis represents a calendar day; the Y-axis shows the count of habits completed on that day. Include previous/next month navigation so users can browse historical data.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-login-signup-page-that-allows-users-to-create-an-account-and-log-in-using-internet-identity-the-page-should-be-the-entry-point-for-unauthenticated-users-and-redirect-to-the-main-habitspage-upon-successful-authentication",
+      "title": "Add a login/signup page that allows users to create an account and log in using Internet Identity. The page should be the entry point for unauthenticated users and redirect to the main HabitsPage upon successful authentication.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-backend-actor-to-scope-all-habit-data-to-the-authenticated-caller-s-principal-the-gethabits-createhabit-deletehabit-markcomplete-and-unmarkcomplete-methods-must-only-read-and-write-habits-belonging-to-the-calling-user-s-principal-so-one-user-s-habits-are-never-visible-to-another",
+      "title": "Update the backend actor to scope all habit data to the authenticated caller's principal. The getHabits, createHabit, deleteHabit, markComplete, and unmarkComplete methods must only read and write habits belonging to the calling user's principal, so one user's habits are never visible to another.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-the-monthlyhabitschart-component-on-habitspage-show-a-small-popup-tooltip-or-modal-when-the-user-clicks-a-bar-the-popup-must-list-the-names-of-all-habits-that-were-completed-on-that-specific-calendar-day",
+      "title": "In the MonthlyHabitsChart component on HabitsPage, show a small popup (tooltip or modal) when the user clicks a bar. The popup must list the names of all habits that were completed on that specific calendar day.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Add habit feature",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Mark daily completion",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Track streak",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Show monthly calendar",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Clean UI",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Implement a backend data model and actor methods for habits. Each habit must have: a unique ID, a name, a creation date, a list of completion dates (one per calendar day), and a computed current streak (consecutive days ending today or yesterday). Expose methods: createHabit(name), deleteHabit(id), markComplete(id, date), unmarkComplete(id, date), getHabits() returning all habits with their completion history and current streak.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Add a login/signup page for user authentication so users can create accounts and log in",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Isolate habit data per user — one user's habits must not be visible to other users",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Show a popup when clicking on a bar in the monthly chart displaying the completed habit details for that day",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Habit Tracker",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

@@ -1,0 +1,68 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-a-login-signup-page-that-allows-users-to-create-an-account-and-log-in-using-internet-identity-the-page-should-be-the-entry-point-for-unauthenticated-users-and-redirect-to-the-main-habitspage-upon-successful-authentication",
+      "featureTitle": "Add a login/signup page that allows users to create an account and log in using Internet Identity. The page should be the entry point for unauthenticated users and redirect to the main HabitsPage upon successful authentication.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/Layout.tsx",
+        "frontend/src/components/ProfileSetupModal.tsx",
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/pages/LoginPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-backend-actor-to-scope-all-habit-data-to-the-authenticated-caller-s-principal-the-gethabits-createhabit-deletehabit-markcomplete-and-unmarkcomplete-methods-must-only-read-and-write-habits-belonging-to-the-calling-user-s-principal-so-one-user-s-habits-are-never-visible-to-another",
+      "featureTitle": "Update the backend actor to scope all habit data to the authenticated caller's principal. The getHabits, createHabit, deleteHabit, markComplete, and unmarkComplete methods must only read and write habits belonging to the calling user's principal, so one user's habits are never visible to another.",
+      "files": [
+        "frontend/src/hooks/useQueries.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-in-the-monthlyhabitschart-component-on-habitspage-show-a-small-popup-tooltip-or-modal-when-the-user-clicks-a-bar-the-popup-must-list-the-names-of-all-habits-that-were-completed-on-that-specific-calendar-day",
+      "featureTitle": "In the MonthlyHabitsChart component on HabitsPage, show a small popup (tooltip or modal) when the user clicks a bar. The popup must list the names of all habits that were completed on that specific calendar day.",
+      "files": [
+        "frontend/src/components/CompletedHabitsPopover.tsx",
+        "frontend/src/components/MonthlyHabitsChart.tsx",
+        "frontend/src/utils/chartHelpers.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

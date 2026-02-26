@@ -1,0 +1,18 @@
+{
+  "frontend/src/index.css": "Global styles with warm terracotta/cream OKLCH color system, Nunito + Inter font imports, and base typography rules for light and dark modes.",
+  "frontend/tailwind.config.js": "Extended Tailwind config with custom font families (Nunito/Inter), habit-done color token, card shadow utilities, fade-in/scale-in animations, and additional border-radius tokens.",
+  "frontend/src/utils/dateHelpers.ts": "Utility functions for converting between JS Date and backend bigint timestamps, computing streaks from execution arrays, and checking completion status.",
+  "frontend/src/utils/calendarHelpers.ts": "Calendar grid generation utilities producing week arrays with day metadata (isToday, isFuture, isCurrentMonth), month navigation helpers, and completion checking.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations including habits (getHabits, createHabit, deleteHabit, markComplete, unmarkComplete) and user profile (useGetCallerUserProfile, useSaveCallerUserProfile) with proper cache invalidation.",
+  "frontend/src/components/AddHabitForm.tsx": "Controlled form component with text input and submit button for creating new habits, with loading state and input clearing on success.",
+  "frontend/src/components/HabitCalendar.tsx": "Monthly calendar grid component showing completion status per day with month navigation, day toggle interactions, and pending state indicators.",
+  "frontend/src/components/HabitCard.tsx": "Habit card displaying name, streak badge, today's completion toggle, expand/collapse calendar, and delete with AlertDialog confirmation.",
+  "frontend/src/components/Layout.tsx": "App shell with sticky header (logo, title, user name display, and logout button), centered content area, and footer with dynamic year and caffeine.ai attribution.",
+  "frontend/src/pages/HabitsPage.tsx": "Main habits page updated to show the best-streak habit name below the streak count, add month navigation state, and render the new MonthlyHabitsChart below the stats summary.",
+  "frontend/src/App.tsx": "Root app component that handles authentication routing — shows LoginPage for unauthenticated users, a loading spinner during auth/profile checks, ProfileSetupModal for new users, and HabitsPage wrapped in Layout for authenticated users with profiles.",
+  "frontend/src/utils/chartHelpers.ts": "Chart utility module with functions to aggregate daily completions, generate day arrays, format month/year strings, and the new getHabitsCompletedOnDate function that returns habit names completed on a specific date.",
+  "frontend/src/components/MonthlyHabitsChart.tsx": "Monthly bar chart component with clickable bars that open a CompletedHabitsPopover showing habits completed on the clicked day, with month navigation and color-coded bars for today/completed/empty states.",
+  "frontend/src/pages/LoginPage.tsx": "New login/signup page shown to unauthenticated users, featuring a hero section with the app logo, feature highlights, and an Internet Identity sign-in button with loading state.",
+  "frontend/src/components/ProfileSetupModal.tsx": "Modal dialog that prompts first-time authenticated users to enter their display name, using the useSaveCallerUserProfile mutation with validation and loading states.",
+  "frontend/src/components/CompletedHabitsPopover.tsx": "Popover component that displays a formatted date header and a list of habit names completed on that day, with an empty state message when no habits were completed."
+}
